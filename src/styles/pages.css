@@ -1,0 +1,229 @@
+/* 内容页面样式 */
+body {
+  background-color: var(--sand-color-light);
+}
+
+/* 移除site-header样式，保留其他功能 */
+.site-header {
+  display: none;
+}
+
+.site-location {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.content-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 40px 0 150px;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: calc(100vh - 200px);
+}
+
+.site-image {
+  flex: 1;
+  min-width: 300px;
+  margin-right: 40px;
+  margin-bottom: 30px;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 400px;
+  background-color: var(--sand-color);
+  border-radius: 5px;
+}
+
+.site-info {
+  flex: 2;
+  min-width: 300px;
+}
+
+.info-section h2 {
+  color: var(--sand-color-dark);
+  margin: 25px 0 15px 0;
+  font-size: 1.8rem;
+  border-bottom: 2px solid var(--sand-color);
+  padding-bottom: 8px;
+}
+
+.info-section p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.back-home {
+  text-align: center;
+  margin: 50px 0 30px;
+}
+
+.back-home a {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: var(--sand-color-dark);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+/* 内容页版权信息 */
+.copyright {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  z-index: 9;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation Bar Style */
+.image-navigation {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 15px;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: fixed;
+  bottom: 45px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  transition: all 0.5s ease;
+  padding-right: 10%;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+  margin: 0 10px;
+  position: relative;
+}
+
+.nav-item:hover {
+  transform: translateY(-5px);
+}
+
+.nav-img {
+  width: 80px;
+  height: 80px;
+  transition: all 0.3s ease;
+  padding: 0;
+  background-color: transparent;
+}
+
+.nav-item:hover .nav-img {
+  transform: scale(1.2);
+}
+
+.nav-title {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-light);
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-item:hover .nav-title {
+  opacity: 1;
+}
+
+/* 视频区域样式 */
+.video-section {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  /* 16:9 宽高比 */
+  overflow: hidden;
+}
+
+#desert-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 保持比例填充 */
+}
+
+#desert-video:hover+.controls {
+  opacity: 1;
+}
+
+.video-caption {
+  text-align: center;
+  margin-top: 15px;
+  font-style: italic;
+  color: var(--sand-color-dark);
+  font-size: 1rem;
+}
+
+.desert-info {
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .content-container {
+    flex-direction: column;
+  }
+
+  .site-image {
+    margin-right: 0;
+  }
+
+  .image-placeholder {
+    height: 300px;
+  }
+}
+
+/* 确保语言切换器和导航图标保持可见 */
+.language-switcher {
+  z-index: 1100;
+}
+
+/* 设置视频样式 - 优化以撑满屏幕宽度 */
+.video-container video,
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* 视频控制元素仅在悬停时显示 */
+.video-container video::-webkit-media-controls,
+.video-wrapper video::-webkit-media-controls {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.video-container video:hover::-webkit-media-controls,
+.video-wrapper video:hover::-webkit-media-controls {
+  opacity: 1;
+}

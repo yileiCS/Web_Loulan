@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location of Loulan 🐫</title>
+  <link rel="stylesheet" href="../src/styles/main.css">
+  <link rel="stylesheet" href="../src/styles/pages.css">
+  <link rel="stylesheet" href="../src/styles/globe.css">
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    /* 参考文献样式 */
+    .citation {
+      font-size: 0.7em;
+      vertical-align: super;
+      cursor: pointer;
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .citation:hover {
+      text-decoration: underline;
+    }
+
+    .references {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 0.85rem;
+    }
+
+    .references h3 {
+      margin-bottom: 15px;
+    }
+
+    .reference-item {
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+
+    .highlight-reference {
+      animation: highlightFade 2s ease-in-out;
+    }
+
+    @keyframes highlightFade {
+
+      0%,
+      50% {
+        background-color: rgba(52, 152, 219, 0.2);
+        /* 淡蓝色背景 */
+        box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+      }
+
+      100% {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="language-switcher">
+    <button class="lang-btn active" data-lang="zh">中文</button>
+    <button class="lang-btn" data-lang="en">English</button>
+  </div>
+
+  <div class="nav-icons">
+    <a href="../index.html">
+      <img src="../public/images/icon_HomePage.png" alt="Home" class="home-icon">
+    </a>
+    <img src="../public/images/icon_Music.png" alt="Music" class="music-icon">
+  </div>
+
+  <div class="content-container">
+    <div class="globe-section">
+      <div class="globe-controls">
+        <div class="silk-road-button-container">
+          <img src="../public/images/image_SilkRoadRoute.png" alt="Silk Road Map" id="globe-btn"
+            class="silk-road-image">
+          <p class="button-text zh">点击探索丝绸之路</p>
+          <p class="button-text en">Click to explore the Silk Road</p>
+        </div>
+      </div>
+
+      <div id="map-container" class="hidden">
+        <div id="silk-road-map"></div>
+        <div class="map-controls">
+          <div class="control-group">
+            <button class="map-mode-btn" data-mode="terrain">地形图</button>
+            <button class="map-mode-btn active" data-mode="satellite">卫星图</button>
+            <button class="map-route-btn active" data-route="arcgis">路线</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- info  -->
+      <div id="place-info" class="hidden">
+        <button class="close-info">×</button>
+        <h3 id="place-name"></h3>
+        <div class="place-image-container">
+          <img id="place-image" src="" alt="">
+        </div>
+        <div id="place-description"></div>
+      </div>
+    </div>
+
+    <div class="location-info">
+      <div class="info-section zh">
+        <h2>历史地理意义</h2>
+        <p>楼兰古城位于塔克拉玛干沙漠东端和罗布泊西侧<a href="#ref1" class="citation">1</a>，处于丝绸之路南北两道的交汇点，是古代东西方交通的重要枢纽<a href="#ref2"
+            class="citation">2</a>。因其地理位置的重要性，楼兰在公元前2世纪至公元4世纪曾是西域重要的政治、经济和文化中心<a href="#ref3" class="citation">3</a>。
+        </p>
+
+        <h2>地理环境变迁</h2>
+        <p>楼兰地区曾是水草丰茂的绿洲，有塔里木河和孔雀河流经<a href="#ref4" class="citation">4</a>。然而，由于气候变化、水资源减少以及人类活动的影响，楼兰逐渐被沙漠吞噬<a
+            href="#ref5" class="citation">5</a>，最终在公元4世纪左右被废弃，成为沙漠中的"死城"<a href="#ref6" class="citation">6</a>。</p>
+
+        <h2>现代发现</h2>
+        <p>楼兰古城遗址于1900年由瑞典探险家斯文·赫定重新发现<a href="#ref7"
+            class="citation">7</a>，随后引起了世界各国考古学家的关注。目前，楼兰遗址属于中国重点文物保护单位，继续为研究古代丝绸之路历史和中亚文明提供重要资料<a href="#ref8"
+            class="citation">8</a>。</p>
+
+        <!-- 参考文献部分 -->
+        <div class="references" style="padding-left: 0;">
+          <h3>参考文献</h3>
+          <ol style="padding-left: 20px;">
+            <li id="ref1">维基百科. <a href="https://en.wikipedia.org/wiki/Loulan_Kingdom" target="_blank">楼兰王国</a>. 2024.
+            </li>
+            <li id="ref2">丝绸之路旅行. <a
+                href="https://www.silkroadtravel.com/silk-road-travel-guide/ancient-city-loulan.html"
+                target="_blank">古城楼兰</a>. 2023.</li>
+            <li id="ref3">ResearchGate. <a
+                href="https://www.researchgate.net/publication/232503253_The_road_to_the_Loulan_Kingdom"
+                target="_blank">通往楼兰王国的道路</a>. 2018.</li>
+            <li id="ref4">Li X. et al. <a href="https://www.nature.com/articles/srep43102" target="_blank">The essential
+                role of the Tarim Basin wetland with respect to the dust problem in East Asia</a>. Scientific Reports.
+              2017.</li>
+            <li id="ref5">Yao T. et al. <a href="https://www.sciencedirect.com/science/article/pii/S1040618220308508"
+                target="_blank">Environmental changes in the Loulan region of the northeastern Tarim Basin</a>.
+              Quaternary International. 2020.</li>
+            <li id="ref6">华盛顿时报. <a href="https://www.washingtontimes.com/news/2005/jan/13/20050113-104224-1613r/"
+                target="_blank">古代丝绸之路上的木乃伊</a>. 2005年1月13日.</li>
+            <li id="ref7">中国日报. <a href="https://www.chinadaily.com.cn/a/202404/22/WS6625b5eca31082fc043c3229_2.html"
+                target="_blank">楼兰古城考古发现</a>. 2024年4月22日.</li>
+            <li id="ref8">中国旅游指南. <a href="https://www.travelchinaguide.com/attraction/xinjiang/korla/loulan.htm"
+                target="_blank">楼兰古城遗址</a>. 2023.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="info-section en">
+        <h2>Historical Geographical Significance</h2>
+        <p>Loulan Ancient City is located at the eastern end of the Taklamakan Desert and the western side of Lop Nur<a
+            href="#ref1" class="citation">1</a>,
+          at the intersection of the northern and southern routes of the Silk Road. It was an important hub for ancient
+          East-West communication<a href="#ref2" class="citation">2</a>. Due to its strategic location, Loulan was a
+          significant political, economic, and
+          cultural center in the Western Regions from the 2nd century BCE to the 4th century CE<a href="#ref3"
+            class="citation">3</a>.</p>
+
+        <h2>Geographical Changes</h2>
+        <p>The Loulan area was once a lush oasis with the Tarim River and Peacock River flowing through it<a
+            href="#ref4" class="citation">4</a>. However, due
+          to climate change, reduced water resources, and human activities, Loulan was gradually swallowed by the
+          desert<a href="#ref5" class="citation">5</a>
+          and eventually abandoned around the 4th century CE, becoming a "dead city" in the desert<a href="#ref6"
+            class="citation">6</a>.</p>
+
+        <h2>Modern Discovery</h2>
+        <p>The ruins of Loulan Ancient City were rediscovered in 1900 by Swedish explorer Sven Hedin<a href="#ref7"
+            class="citation">7</a>, subsequently
+          attracting attention from archaeologists worldwide. Currently, the Loulan site is under key cultural relics
+          protection in China, continuing to provide important materials for studying the history of the ancient Silk
+          Road and Central Asian civilizations<a href="#ref8" class="citation">8</a>.</p>
+
+        <!-- Reference section -->
+        <div class="references" style="padding-left: 0;">
+          <h3>References</h3>
+          <ol style="padding-left: 20px;">
+            <li id="ref1">Wikipedia. <a href="https://en.wikipedia.org/wiki/Loulan_Kingdom" target="_blank">Loulan
+                Kingdom</a>. 2024.</li>
+            <li id="ref2">Silk Road Travel. <a
+                href="https://www.silkroadtravel.com/silk-road-travel-guide/ancient-city-loulan.html"
+                target="_blank">Ancient City of Loulan</a>. 2023.</li>
+            <li id="ref3">ResearchGate. <a
+                href="https://www.researchgate.net/publication/232503253_The_road_to_the_Loulan_Kingdom"
+                target="_blank">The road to the Loulan Kingdom</a>. 2018.</li>
+            <li id="ref4">Li X. et al. <a href="https://www.nature.com/articles/srep43102" target="_blank">The essential
+                role of the Tarim Basin wetland with respect to the dust problem in East Asia</a>. Scientific Reports.
+              2017.</li>
+            <li id="ref5">Yao T. et al. <a href="https://www.sciencedirect.com/science/article/pii/S1040618220308508"
+                target="_blank">Environmental changes in the Loulan region of the northeastern Tarim Basin</a>.
+              Quaternary International. 2020.</li>
+            <li id="ref6">The Washington Times. <a
+                href="https://www.washingtontimes.com/news/2005/jan/13/20050113-104224-1613r/" target="_blank">Mummies
+                of the Ancient Silk Road</a>. January 13, 2005.</li>
+            <li id="ref7">China Daily. <a
+                href="https://www.chinadaily.com.cn/a/202404/22/WS6625b5eca31082fc043c3229_2.html"
+                target="_blank">Archaeological Discoveries in Loulan Ancient City</a>. April 22, 2024.</li>
+            <li id="ref8">Travel China Guide. <a
+                href="https://www.travelchinaguide.com/attraction/xinjiang/korla/loulan.htm" target="_blank">Loulan
+                Ancient City Ruins</a>. 2023.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="image-navigation">
+    <div class="nav-item" data-page="page_bian">
+      <img src="../public/font/边.png" alt="边" class="nav-img">
+      <span class="nav-title">Location</span>
+    </div>
+    <div class="nav-item" data-page="page_sha">
+      <img src="../public/font/沙.png" alt="沙" class="nav-img">
+      <span class="nav-title">Desert</span>
+    </div>
+    <div class="nav-item" data-page="page_chi">
+      <img src="../public/font/池.png" alt="池" class="nav-img">
+      <span class="nav-title">City</span>
+    </div>
+    <div class="nav-item" data-page="page_shu">
+      <img src="../public/font/书.png" alt="书" class="nav-img">
+      <span class="nav-title">Literature</span>
+    </div>
+    <div class="nav-item" data-page="page_ji">
+      <img src="../public/font/记.png" alt="记" class="nav-img">
+      <span class="nav-title">Antiques</span>
+    </div>
+    <!-- <div class="nav-item" data-page="page_wei">
+      <img src="../public/font/为.png" alt="为" class="nav-img">
+      <span class="nav-title">Being</span>
+    </div> -->
+  </nav>
+
+  <div class="copyright">
+    Copyright © 2025 Designed by Yilei Xiao.
+  </div>
+
+  <audio id="pageAudio" loop>
+    <source src="../public/audio/music_LouLanGuDao.wav" type="audio/wav">
+  </audio>
+
+  <script src="../src/js/main.js"></script>
+  <script src="../src/js/globe.js"></script>
+  <script>
+    // 添加引用链接点击事件
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.citation').forEach(citation => {
+        citation.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            // 平滑滚动到目标元素
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+
+            // 短暂高亮显示引用项
+            targetElement.classList.add('highlight-reference');
+            setTimeout(() => {
+              targetElement.classList.remove('highlight-reference');
+            }, 2000);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

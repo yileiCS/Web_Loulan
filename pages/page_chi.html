@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loulan City Layout 🐫</title>
+  <link rel="stylesheet" href="../src/styles/main.css">
+  <link rel="stylesheet" href="../src/styles/pages.css">
+  <link rel="stylesheet" href="../src/styles/city-layout.css">
+</head>
+
+<body>
+  <div class="language-switcher">
+    <button class="lang-btn active" data-lang="zh">中文</button>
+    <button class="lang-btn" data-lang="en">English</button>
+  </div>
+
+  <div class="nav-icons">
+    <a href="../index.html">
+      <img src="../public/images/icon_HomePage.png" alt="Home" class="home-icon">
+    </a>
+    <img src="../public/images/icon_Music.png" alt="Music" class="music-icon">
+  </div>
+
+  <div class="content-container">
+    <h1 class="map-title zh">楼兰古城遗址平面图</h1>
+    <h1 class="map-title en">Loulan Ancient City Layout Map</h1>
+    <div class="city-layout-section">
+      <div class="city-map-container">
+        <img src="../public/images/OldCity_Layout_en.png" alt="Old City Layout" class="city-map">
+
+        <!-- 红点标记 -->
+        <div class="map-marker" data-spot="spot2" style="top: 50%; left: 31%;">
+          <div class="marker-dot"></div>
+        </div>
+
+        <div class="map-marker" data-spot="spot1" style="top: 33%; left: 72%;">
+          <div class="marker-dot"></div>
+        </div>
+
+        <div class="map-marker" data-spot="spot3" style="top: 75%; left: 45%;">
+          <div class="marker-dot emoji">📷</div>
+        </div>
+
+        <div class="map-marker" data-spot="spot4" style="top: 60%; left: 85%;">
+          <div class="marker-dot emoji">📷</div>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <div class="zh">
+          <h2>古城概览</h2>
+          <p>楼兰故城遗址位于新疆维吾尔自治区巴音郭楞蒙古自治州若羌县境内罗布泊的西北角，是汉—晋时期（前2世纪—4世纪）古城遗址<a href="#ref1"
+              class="citation">1</a>。楼兰一名最早见于《史记》，为古代西域三十六国之一，通往丝路南道的要冲。</p>
+          <p>楼兰故城遗址呈不规则方形，城中有一条西北至东南的古水道斜贯，古水道东北是佛寺区，南岸为官府区，西部是贵族居住区，西南为平民居住区<a href="#ref2"
+              class="citation">2</a>。建筑多用土坯或木材建造，因此遗址上残存很多建筑木材堆积。</p>
+          <p>楼兰故城的建筑既具有典型的汉文化特色，也具有突出的本土文化内容，同时它还蕴涵着大量珍贵文物，这些文物承载着丰富的政治、经济、文化信息，对研究中西交通、东西文化交流和我国古代边疆与内地的联系均有着重要价值<a
+              href="#ref3" class="citation">3</a>。</p>
+          <div class="references">
+            <h3>参考文献</h3>
+            <ol>
+              <li id="ref1">中华人民共和国国务院. 国务院关于公布第三批全国重点文物保护单位的通知. 中国政府网. 1988-01-13.</li>
+              <li id="ref2">林梅村. 丝绸之路考古十五讲. 北京大学出版社. 2006: 48.</li>
+              <li id="ref3">霍旭初. 新疆史地文献资料(6)-中国丝绸之路名城楼兰古城. 中国边疆史地研究. 1991(3): 47-48.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="en">
+          <h2>City Overview</h2>
+          <p>The Loulan Ancient City ruins are located in the northwest corner of Lop Nur in Ruoqiang County,
+            Bayingoleng Mongolian Autonomous Prefecture, Xinjiang Uygur Autonomous Region, and are the ruins of an
+            ancient city from the Han-Jin period (2nd century BCE to 4th century CE)<a href="#ref1-en"
+              class="citation">1</a>. The name Loulan first appeared in the "Records of the Grand Historian," as one of
+            the thirty-six states of the ancient Western Regions and a key hub on the southern route of the Silk Road.
+          </p>
+          <p>The Loulan Ancient City ruins form an irregular square, with an ancient waterway diagonally crossing from
+            northwest to southeast. The northeast of the waterway is the temple area, the south bank is the government
+            area, the west is the aristocratic residential area, and the southwest is the civilian residential area<a
+              href="#ref2-en" class="citation">2</a>. Most buildings were constructed with adobe or wood, so many
+            building wood piles remain at the site.</p>
+          <p>The architecture of Loulan Ancient City has both typical Han cultural characteristics and distinctive local
+            cultural elements. It also contains numerous precious artifacts that carry rich political, economic, and
+            cultural information, which are of great importance for studying the East-West transportation, cultural
+            exchanges, and the connections between ancient China's frontiers and inland regions<a href="#ref3-en"
+              class="citation">3</a>.</p>
+          <div class="references">
+            <h3>References</h3>
+            <ol>
+              <li id="ref1-en">State Council of the People's Republic of China. Notice on the Publication of the Third
+                Batch of National Key Cultural Relics Protection Units. Chinese Government Website. January 13, 1988.
+              </li>
+              <li id="ref2-en">Lin, Meicun. Fifteen Lectures on Silk Road Archaeology. Peking University Press. 2006:
+                48.</li>
+              <li id="ref3-en">Huo, Xuchu. Xinjiang Historical and Geographical Documents (6) - Loulan Ancient City, a
+                Famous City on China's Silk Road. Research on China's Frontier History and Geography. 1991(3): 47-48.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 图片放大弹窗 -->
+  <div id="spotModal" class="spot-modal">
+    <div class="spot-modal-content">
+      <span class="close-modal">&times;</span>
+      <img id="spotImage" src="" alt="">
+      <div class="spot-info">
+        <h3 id="spotTitle" class="zh"></h3>
+        <h3 id="spotTitleEn" class="en"></h3>
+        <p id="spotDescription" class="zh"></p>
+        <p id="spotDescriptionEn" class="en"></p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="image-navigation">
+    <div class="nav-item" data-page="page_bian">
+      <img src="../public/font/边.png" alt="边" class="nav-img">
+      <span class="nav-title">Location</span>
+    </div>
+    <div class="nav-item" data-page="page_sha">
+      <img src="../public/font/沙.png" alt="沙" class="nav-img">
+      <span class="nav-title">Desert</span>
+    </div>
+    <div class="nav-item" data-page="page_chi">
+      <img src="../public/font/池.png" alt="池" class="nav-img">
+      <span class="nav-title">City</span>
+    </div>
+    <div class="nav-item" data-page="page_shu">
+      <img src="../public/font/书.png" alt="书" class="nav-img">
+      <span class="nav-title">Literature</span>
+    </div>
+    <div class="nav-item" data-page="page_ji">
+      <img src="../public/font/记.png" alt="记" class="nav-img">
+      <span class="nav-title">Antiques</span>
+    </div>
+    <!-- <div class="nav-item" data-page="page_wei">
+      <img src="../public/font/为.png" alt="为" class="nav-img">
+      <span class="nav-title">Being</span>
+    </div> -->
+  </nav>
+
+  <div class="copyright">
+    Copyright © 2025 Designed by Yilei Xiao.
+  </div>
+
+  <audio id="pageAudio" loop>
+    <source src="../public/audio/ancient_melody.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="../src/js/main.js"></script>
+  <script src="../src/js/city-layout.js"></script>
+  <script>
+    // 添加引用链接点击事件
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.citation').forEach(citation => {
+        citation.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            // 平滑滚动到目标元素
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+
+            targetElement.classList.add('highlight-reference');
+            setTimeout(() => {
+              targetElement.classList.remove('highlight-reference');
+            }, 2000);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

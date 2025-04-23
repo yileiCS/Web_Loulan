@@ -1,0 +1,447 @@
+.calligraphy-container {
+  position: fixed;
+  top: 60px;
+  left: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 32vw;
+}
+
+.calligraphy-character {
+  width: 25vw;
+  height: auto;
+  margin: 9px 0;
+  filter: drop-shadow(2px 5px rgba(0, 0, 0, 0.2));
+}
+
+.calligraphy-character:nth-child(odd) {
+  align-self: flex-start;
+}
+
+.calligraphy-character:nth-child(even) {
+  align-self: flex-end;
+}
+
+/* Basic Style Settings */
+@font-face {
+  font-family: 'CustomChinese';
+  src: url('../fonts/custom-chinese.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+:root {
+  --sand-color: #d2c5b0;
+  --sand-color-light: #e8ded0;
+  --sand-color-dark: #a19780;
+  --text-dark: #2c2c2c;
+  --text-light: #ffffff;
+}
+
+body {
+  background-color: var(--sand-color-light);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* 中文版字体设置 */
+html[lang="zh-CN"] body {
+  font-family: 'CustomChinese', 'Microsoft YaHei', '微软雅黑', 'STHeiti', 'SimHei', sans-serif;
+}
+
+html[lang="zh-CN"] h1,
+html[lang="zh-CN"] h2,
+html[lang="zh-CN"] h3,
+html[lang="zh-CN"] h4,
+html[lang="zh-CN"] .zh {
+  font-family: 'CustomChinese', 'Microsoft YaHei', '微软雅黑', 'STHeiti', 'SimHei', sans-serif;
+}
+
+/* Prevent Scroll on Home Page */
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Language Switcher */
+.language-switcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 10px;
+}
+
+.lang-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  border: 1px solid var(--text-light);
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.lang-btn.active {
+  background-color: var(--text-light);
+  color: var(--sand-color-dark);
+}
+
+/* Navigation Icons */
+.nav-icons {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.home-icon,
+.music-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-icon:hover,
+.music-icon:hover {
+  transform: scale(1.1);
+}
+
+.music-icon {
+  animation: rotate 10s linear infinite;
+}
+
+.music-icon.paused {
+  animation-play-state: paused;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Full Screen Video Container */
+.fullscreen-video-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+#background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-light);
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+}
+
+/* Navigation Bar Style */
+.image-navigation {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 15px;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: fixed;
+  bottom: 55px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  transition: all 0.5s ease;
+  padding-right: 10%;
+}
+
+/* 确保子页面中的导航一直显示 */
+body:not(.no-scroll) .image-navigation {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+  margin: 0 10px;
+  position: relative;
+}
+
+.nav-item:hover {
+  transform: translateY(-5px);
+}
+
+.nav-img {
+  width: 80px;
+  height: 80px;
+  transition: all 0.3s ease;
+  padding: 0;
+  background-color: transparent;
+}
+
+.nav-item:hover .nav-img {
+  transform: scale(1.2);
+}
+
+.nav-title {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-light);
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-item:hover .nav-title {
+  opacity: 1;
+}
+
+/* Copyright */
+.copyright {
+  text-align: center;
+  padding: 15px 0;
+  font-size: 0.8rem;
+  color: #ffffff97;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Language Display Control */
+html[lang="zh-CN"] .en {
+  display: none;
+}
+
+html[lang="en"] .zh {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .video-overlay h1 {
+    font-size: 2.5rem;
+  }
+
+  .video-overlay p {
+    font-size: 1.2rem;
+  }
+
+  .image-navigation {
+    gap: 15px;
+    bottom: 30px;
+    right: 10px;
+  }
+
+  .nav-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .nav-icons {
+    top: 15px;
+    left: 15px;
+    gap: 10px;
+  }
+
+  .home-icon,
+  .music-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@font-face {
+  font-family: 'CaoshuFont';
+  src: url('../fonts/草书原版.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LishuFont';
+  src: url('../fonts/STLITI.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.entrance-point {
+  position: fixed;
+  bottom: 180px;
+  left: 70%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.5s ease;
+}
+
+.pulse-dot {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
+  animation: pulse 2s infinite;
+}
+
+.entrance-text {
+  color: white;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  max-width: 3000px;
+  font-family: 'LishuFont', '隶书', serif;
+  letter-spacing: 2px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* 隐藏类 */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 放大动画类 */
+.zoom-fade {
+  animation: zoomFade 1.5s forwards;
+}
+
+@keyframes zoomFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 呼吸效果动画 - 已移除动态效果 */
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.breathing-marker {
+  /* 不再使用动画效果 */
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+}
+
+/* 标记提示样式 */
+.marker-tooltip {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--sand-color-dark);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 地图路线按钮样式 */
+.route-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.route-btn {
+  background-color: var(--sand-color);
+  border: 1px solid var(--sand-color-dark);
+  color: var(--text-dark);
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.route-btn:hover {
+  background-color: var(--sand-color-dark);
+  color: var(--text-light);
+}
+
+.route-btn.active {
+  background-color: var(--sand-color-dark);
+  color: var(--text-light);
+}

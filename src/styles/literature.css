@@ -1,0 +1,478 @@
+/* 楼兰文学传承页面样式 */
+body {
+  position: relative;
+  background-color: var(--sand-color-light);
+}
+
+.background-image {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../public/images/Ruin2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  z-index: -2;
+}
+
+.background-overlay {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+.literature-section {
+  width: 100%;
+  margin: 30px 0 50px;
+  position: relative;
+}
+
+.literature-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.literature-item {
+  background-color: rgba(50, 50, 50, 0.5);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'KaiTi', '楷体', serif;
+  font-size: 1.5rem;
+  width: 80%;
+  max-width: 800px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.literature-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  background-color: rgba(60, 60, 60, 0.6);
+}
+
+.literature-item::after {
+  content: "→";
+  position: absolute;
+  right: 20px;
+  transition: transform 0.3s ease;
+}
+
+.literature-item:hover::after {
+  transform: translateX(5px);
+}
+
+/* 画卷样式 */
+.scroll-container {
+  width: 0;
+  max-width: 90%;
+  margin: 20px auto;
+  background-image: url('../../public/images/scroll-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: all 1s ease;
+  height: 0;
+  opacity: 0;
+  position: relative;
+}
+
+.scroll-container.open {
+  width: 90%;
+  height: auto;
+  opacity: 1;
+  margin: 20px auto;
+  padding: 40px;
+  background-color: rgba(232, 222, 208, 0.95);
+}
+
+.scroll-content {
+  position: relative;
+  font-family: 'KaiTi', '楷体', serif;
+  color: #333;
+  line-height: 1.8;
+  text-align: justify;
+  padding-bottom: 20px;
+}
+
+.scroll-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
+}
+
+.scroll-text {
+  font-size: 1.3rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  height: 500px;
+  margin: 20px auto;
+  overflow-x: auto;
+  padding: 20px 0;
+  text-align: left;
+}
+
+.scroll-text p {
+  display: inline-block;
+  margin: 0 25px;
+  line-height: 2;
+  letter-spacing: 3px;
+}
+
+/* 设置标点符号的显示方式 */
+.scroll-text {
+  -webkit-text-emphasis: none;
+  text-emphasis: none;
+}
+
+/* 美化滚动条 */
+/* .scroll-text::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+} */
+
+.scroll-text::-webkit-scrollbar-track {
+  background: rgba(210, 197, 176, 0.3);
+  border-radius: 10px;
+}
+
+.scroll-text::-webkit-scrollbar-thumb {
+  background: rgba(161, 151, 128, 0.7);
+  border-radius: 10px;
+  border: 2px solid rgba(210, 197, 176, 0.3);
+}
+
+.scroll-text::-webkit-scrollbar-thumb:hover {
+  background: rgba(161, 151, 128, 0.9);
+}
+
+.scroll-author {
+  text-align: right;
+  font-style: italic;
+  margin-top: 20px;
+  font-size: 1.1rem;
+}
+
+.scroll-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1rem;
+  border: none;
+}
+
+.scroll-close:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.scroll-note {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* 英文模式下的特殊注释 */
+.scroll-note.en-only {
+  display: none;
+}
+
+html[lang="en"] .scroll-note.en-only {
+  display: block;
+  color: #a18354;
+  border-top: 1px dashed rgba(161, 131, 84, 0.3);
+  padding-top: 15px;
+  margin-top: 15px;
+  font-weight: normal;
+}
+
+/* 在英文模式下保持中文内容的显示 */
+html[lang="en"] .scroll-title,
+html[lang="en"] .scroll-text,
+html[lang="en"] .scroll-author {
+  /* 保持显示，不受语言切换影响 */
+  display: block;
+}
+
+/* 英文翻译区域样式 */
+.english-translation {
+  display: none;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(161, 131, 84, 0.5);
+  font-family: 'Times New Roman', serif;
+}
+
+html[lang="en"] .english-translation {
+  display: block;
+}
+
+.english-translation h4 {
+  font-size: 1.4rem;
+  color: #a18354;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.translation-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  padding: 0 15px;
+  text-align: left;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.translation-text p {
+  margin-bottom: 15px;
+}
+
+.translation-note {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: right;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .literature-item {
+    width: 90%;
+    font-size: 1.2rem;
+    padding: 12px 20px;
+  }
+
+  .scroll-container.open {
+    padding: 20px;
+  }
+
+  .scroll-text {
+    font-size: 1.1rem;
+    height: 400px;
+  }
+}
+
+/* 新添加的视频背景和文字动画样式 */
+/* 使页面不可滚动 */
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 视频作为背景 */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background-color: #000;
+  /* 添加黑色背景填充可能出现的空白区域 */
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 优化视频显示以提高清晰度 - 使用包含模式，不缩放不裁剪 */
+#literature-video {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 创建固定宽高比窗口以适应不同屏幕尺寸 */
+@media (max-aspect-ratio: 16/9) {
+
+  /* 在宽屏比小于16:9的设备上 */
+  #literature-video {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-aspect-ratio: 16/9) {
+
+  /* 在宽屏比大于16:9的设备上 */
+  #literature-video {
+    width: auto;
+    height: 100%;
+  }
+}
+
+/* 视频遮罩层 - 30%黑色 */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -5;
+}
+
+/* 文字淡入淡出效果 */
+.intro-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  width: 80%;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+  /* 放慢淡入淡出速度 */
+  z-index: 10;
+  font-family: 'KaiTi', '楷体', serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* 文字装饰效果 */
+.intro-text .highlight {
+  color: #e2c88a;
+  font-weight: bold;
+}
+
+/* 调整内容容器样式 */
+.content-container {
+  position: relative;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 3s ease;
+  /* 放慢淡入速度 */
+  height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 120px;
+  /* 为底部导航腾出空间 */
+}
+
+/* 隐藏背景图片和原背景覆盖层 */
+.video-background~.background-image,
+.video-background~.background-overlay {
+  display: none;
+}
+
+/* 文学区域样式调整 */
+.literature-section {
+  padding-top: 30px;
+}
+
+/* 适配不同设备屏幕尺寸 */
+@media (min-width: 1440px) {
+  .intro-text {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-text {
+    font-size: 1.6rem;
+    width: 90%;
+  }
+}
+
+/* 设置文字在高分辨率设备上的锐利度 */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  .intro-text {
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* 修改全屏视频样式 */
+.fullscreen-video {
+  /* 基本设置 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 确保视频始终适应容器 */
+  width: 100%;
+  height: 100%;
+  /* 保持视频比例，但确保完整显示 */
+  object-fit: contain;
+}
+
+/* 解决在不同设备上的显示问题 */
+@media (orientation: portrait) {
+  .fullscreen-video {
+    /* 在竖屏设备上的优化 */
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (orientation: landscape) {
+  .fullscreen-video {
+    /* 在横屏设备上的优化 */
+    width: auto;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* 在超宽屏设备上的调整 */
+@media (min-aspect-ratio: 21/9) {
+  .fullscreen-video {
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

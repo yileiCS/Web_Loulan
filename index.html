@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loulan Ancient City 🐫</title>
+  <link rel="stylesheet" href="src/styles/main.css">
+</head>
+
+<body class="no-scroll">
+  <div class="language-switcher">
+    <button class="lang-btn active" data-lang="zh">中文</button>
+    <button class="lang-btn" data-lang="en">English</button>
+  </div>
+
+  <div class="fullscreen-video-container">
+    <video autoplay muted loop id="background-video">
+      <source src="public/videos/video_City.mp4" type="video/mp4">
+    </video>
+
+    <div class="video-overlay">
+      <div style="margin-top: 40vh;">
+      </div>
+    </div>
+  </div>
+
+  <div class="calligraphy-container">
+    <img src="public/images/HomePage_lou.png" alt="楼" class="calligraphy-character">
+    <img src="public/images/HomePage_lan.png" alt="兰" class="calligraphy-character">
+  </div>
+
+  <div class="entrance-point">
+    <div class="pulse-dot"></div>
+    <p class="entrance-text zh">走进沉睡千年的古城</p>
+    <p class="entrance-text en">Enter the sleeping city in the past</p>
+  </div>
+
+  <nav class="image-navigation hidden">
+    <div class="nav-item" data-page="page_bian">
+      <img src="public/font/边.png" alt="边" class="nav-img">
+      <span class="nav-title">Location</span>
+    </div>
+    <div class="nav-item" data-page="page_sha">
+      <img src="public/font/沙.png" alt="沙" class="nav-img">
+      <span class="nav-title">Desert</span>
+    </div>
+    <div class="nav-item" data-page="page_chi">
+      <img src="public/font/池.png" alt="池" class="nav-img">
+      <span class="nav-title">City</span>
+    </div>
+    <div class="nav-item" data-page="page_shu">
+      <img src="public/font/书.png" alt="书" class="nav-img">
+      <span class="nav-title">Literary</span>
+    </div>
+    <div class="nav-item" data-page="page_ji">
+      <img src="public/font/记.png" alt="记" class="nav-img">
+      <span class="nav-title">Antiques</span>
+    </div>
+    <!-- <div class="nav-item" data-page="page_wei">
+      <img src="public/font/为.png" alt="为" class="nav-img">
+      <span class="nav-title">Being</span>
+    </div> -->
+  </nav>
+
+  <div class="copyright">
+    Copyright © 2025 Designed by Yilei Xiao.
+  </div>
+
+  <audio id="homeAudio" autoplay loop>
+    <source src="public/audio/music_LouLanGuDao.wav" type="audio/wav">
+  </audio>
+
+  <script src="src/js/main.js"></script>
+</body>
+
+</html>

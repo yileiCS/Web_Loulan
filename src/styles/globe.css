@@ -1,0 +1,518 @@
+/* 地球展示区样式 */
+.globe-section {
+  width: 100%;
+  margin: 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.globe-controls {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 丝绸之路图片按钮样式 */
+.silk-road-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.silk-road-image {
+  width: 12.5%;
+  /* 占据画面宽度的八分之一 */
+  min-width: 100px;
+  max-width: 250px;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.silk-road-button-container:hover .silk-road-image {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.button-text {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: var(--sand-color-dark);
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 旧按钮样式保留供参考 */
+.globe-toggle {
+  background-color: var(--sand-color-dark);
+  color: var(--text-light);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.globe-toggle:hover {
+  background-color: var(--text-dark);
+  transform: translateY(-2px);
+}
+
+.globe-icon {
+  width: 24px;
+  height: 24px;
+}
+
+#globe-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  transition: all 0.5s ease;
+}
+
+#globe-container.hidden {
+  height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
+#globe-canvas {
+  flex: 3;
+  height: 100%;
+  background-color: #000;
+}
+
+.globe-info {
+  flex: 1;
+  padding: 20px;
+  background-color: rgba(232, 222, 208, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.globe-info h3 {
+  color: var(--sand-color-dark);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.globe-info p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.coordinates {
+  font-weight: bold;
+  background-color: var(--sand-color-dark);
+  color: var(--text-light);
+  padding: 8px 15px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* 地理内容区样式 */
+.location-info {
+  width: 100%;
+  margin-top: 40px;
+  padding: 0 2.5vw;
+}
+
+/* 地图容器样式 */
+#map-container {
+  width: 100%;
+  max-width: 1200px;
+  height: 600px;
+  position: relative;
+  margin: 0 auto 30px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+#map-container.hidden {
+  height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
+#silk-road-map {
+  flex: 1;
+  width: 100%;
+  min-height: 500px;
+  z-index: 5;
+}
+
+/* 降低地图饱和度 */
+.map-tiles-desaturated {
+  filter: saturate(40%);
+  /* 降低60%饱和度 */
+}
+
+/* 确保点标记在最顶层显示 */
+.leaflet-marker-pane {
+  z-index: 600 !important;
+}
+
+.leaflet-overlay-pane {
+  z-index: 400 !important;
+}
+
+/* 自定义标记点样式，确保显示在路线上方 */
+.breathing-marker {
+  z-index: 1000 !important;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+}
+
+/* 确保圆形标记点在最上层 */
+svg.leaflet-zoom-animated>g>path.leaflet-interactive,
+.leaflet-interactive.breathing-marker {
+  z-index: 1000 !important;
+}
+
+/* 路线样式 */
+.leaflet-overlay-pane path {
+  z-index: 400 !important;
+  stroke-opacity: 0.9 !important;
+  stroke-width: 4px !important;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+}
+
+/* 增强标记点和路线的可见度 */
+.custom-marker {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  z-index: 1000 !important;
+}
+
+/* 地图控制按钮 */
+.map-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 0;
+  background-color: rgba(232, 222, 208, 0.95);
+  border-top: 1px solid #ccc;
+}
+
+.control-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 15px;
+}
+
+.control-label {
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-right: 5px;
+}
+
+.control-label.en {
+  display: none;
+}
+
+html[lang="en"] .control-label.zh {
+  display: none;
+}
+
+html[lang="en"] .control-label.en {
+  display: inline;
+}
+
+.map-mode-btn,
+.map-route-btn {
+  background-color: var(--sand-color);
+  border: 1px solid var(--sand-color-dark);
+  color: var(--text-dark);
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.map-mode-btn:hover,
+.map-route-btn:hover {
+  background-color: var(--sand-color-dark);
+  color: var(--text-light);
+}
+
+.map-mode-btn.active,
+.map-route-btn.active {
+  background-color: var(--sand-color-dark);
+  color: var(--text-light);
+}
+
+/* 地点信息弹窗 */
+#place-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+#place-info.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.close-info {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.close-info:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#place-name {
+  text-align: center;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--sand-color);
+  padding-bottom: 10px;
+}
+
+.place-image-container {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#place-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#place-description {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+  line-height: 1.6;
+}
+
+/* 自定义地图标记 */
+.custom-marker {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(155, 124, 88, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-marker:hover {
+  transform: scale(1.2);
+}
+
+.custom-marker.city {
+  background-color: rgba(201, 96, 41, 0.8);
+}
+
+.custom-marker.loulan {
+  background-color: rgba(201, 41, 41, 0.9);
+  width: 25px;
+  height: 25px;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  #map-container {
+    height: 500px;
+  }
+
+  #silk-road-map {
+    min-height: 400px;
+  }
+
+  .map-controls {
+    padding: 10px 0;
+  }
+
+  .control-group {
+    padding: 0 5px;
+  }
+
+  .map-mode-btn,
+  .map-route-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  #place-info {
+    width: 95%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-controls {
+    gap: 5px;
+  }
+
+  .control-group {
+    gap: 5px;
+  }
+
+  .map-mode-btn,
+  .map-route-btn {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ArcGIS路线样式 */
+.arcgis-route {
+  stroke-opacity: 1 !important;
+  stroke-width: 4px !important;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+}
+
+.arcgis-tooltip {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--sand-color-dark);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+/* 加载指示器 */
+.loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 从page_bian.html移过来的样式 */
+/* 减小文字字号 */
+.info-section p {
+  font-size: 1rem;
+}
+
+.info-section h2 {
+  font-size: 1.6rem;
+}
+
+/* 引用样式 */
+.city-citation {
+  font-size: 0.8em;
+  vertical-align: super;
+  cursor: pointer;
+  color: #3498db;
+  text-decoration: none;
+}
+
+.city-citation:hover {
+  text-decoration: underline;
+}
+
+/* 地点信息中的参考文献样式 */
+.place-references {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.85rem;
+}
+
+.place-references h4 {
+  margin-bottom: 10px;
+  color: var(--sand-color-dark);
+}
+
+.reference-list {
+  padding-left: 20px;
+}
+
+.reference-list li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* 引用项高亮效果 */
+.highlight-reference {
+  animation: highlightFade 2s ease-in-out;
+}
+
+@keyframes highlightFade {
+
+  0%,
+  50% {
+    background-color: rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+  }
+
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}

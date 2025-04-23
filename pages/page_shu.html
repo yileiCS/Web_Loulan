@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loulan Literary Heritage 🐫</title>
+  <link rel="stylesheet" href="../src/styles/main.css">
+  <link rel="stylesheet" href="../src/styles/pages.css">
+  <link rel="stylesheet" href="../src/styles/literature.css">
+</head>
+
+<body>
+  <!-- 视频背景 -->
+  <div class="video-background">
+    <div class="video-wrapper">
+      <video id="literature-video" class="fullscreen-video" autoplay muted loop playsinline>
+        <source src="../public/videos/video_LouLanAntique.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-overlay"></div>
+  </div>
+
+  <!-- 介绍文字 -->
+  <div class="intro-text zh" id="introText1">那些与楼兰有关的文字，<br><span
+      class="highlight">如尘封千年的耳语</span>，<br>穿越时光的长河，触动着我们的心弦。</div>
+  <div class="intro-text zh" id="introText2">纸莎草上的墨迹犹存，<br>沙漠深处的故事仍在<span
+      class="highlight">低语流传</span>。<br>请与我一同聆听，那些跨越千年的文字回响...</div>
+  <div class="intro-text en" id="introTextEn1">These writings about Loulan,<br><span class="highlight">like whispers
+      sealed for millennia</span>,<br>traverse the river of time and touch our hearts.</div>
+  <div class="intro-text en" id="introTextEn2">Ink still visible on ancient papyrus,<br>stories from the desert depths
+    <span class="highlight">still whisper</span>.<br>Let us listen together to these literary echoes across the ages...
+  </div>
+
+  <div class="language-switcher">
+    <button class="lang-btn active" data-lang="zh">中文</button>
+    <button class="lang-btn" data-lang="en">English</button>
+  </div>
+
+  <div class="nav-icons">
+    <a href="../index.html">
+      <img src="../public/images/icon_HomePage.png" alt="Home" class="home-icon">
+    </a>
+    <img src="../public/images/icon_Music.png" alt="Music" class="music-icon">
+  </div>
+
+  <header class="site-header">
+    <h1 class="zh">楼兰文学传承</h1>
+    <h1 class="en">Loulan Literary Heritage</h1>
+  </header>
+
+  <div class="content-container" id="mainContent">
+    <div class="literature-section">
+      <div class="literature-container">
+        <div class="literature-item" data-scroll="scroll1">
+          <span class="zh">《楼兰》</span>
+          <span class="en">Loulan Poem</span>
+        </div>
+        <div class="literature-item" data-scroll="scroll2">
+          <span class="zh">《梁书·张骞传》</span>
+          <span class="en">Book of Liang: Biography of Zhang Qian</span>
+        </div>
+        <div class="literature-item" data-scroll="scroll3">
+          <span class="zh">《屈原·楚辞》楼兰意象</span>
+          <span class="en">Qu Yuan's Chu Ci: Loulan Imagery</span>
+        </div>
+        <div class="literature-item" data-scroll="scroll4">
+          <span class="zh">《西域考古记》</span>
+          <span class="en">Archaeological Records of the Western Regions</span>
+        </div>
+        <div class="literature-item" data-scroll="scroll5">
+          <span class="zh">《沙中死城》</span>
+          <span class="en">Dead City in the Sand</span>
+        </div>
+      </div>
+
+      <!-- 画卷容器 -->
+      <div id="scroll1" class="scroll-container">
+        <button class="scroll-close">&times;</button>
+        <div class="scroll-content">
+          <h3 class="scroll-title">楼兰</h3>
+          <div class="scroll-text">
+            <p>大漠孤烟直，长河落日圆。</p>
+            <p>楼兰故国灭，沙海尽枯干。</p>
+            <p>千年文明祭，万里丝路残。</p>
+            <p>西风瑟瑟起，古道悠悠寒。</p>
+            <p>枯木蓦然立，遗迹渐渐断。</p>
+            <p>羌笛何须怨，胡沙自古漫。</p>
+            <p>金缕赤壁泪，玉簪白骨寒。</p>
+            <p>斗转星移处，谁人听沙叹？</p>
+          </div>
+          <div class="scroll-author">— 现代诗人 许慎之</div>
+          <div class="scroll-note">本诗创作于20世纪，意在展现楼兰古国的历史变迁与沧桑</div>
+          <div class="scroll-note en-only">Note: Classical Chinese poetry is presented in its original form</div>
+
+          <!-- 英文翻译 -->
+          <div class="english-translation">
+            <h4>Loulan (English Translation)</h4>
+            <div class="translation-text">
+              <p>Straight rises the lonely smoke in the vast desert,</p>
+              <p>Round sets the sun over the long river.</p>
+              <p>The ancient kingdom of Loulan has perished,</p>
+              <p>The sea of sand has completely dried up.</p>
+              <p>A thousand years of civilization sacrificed,</p>
+              <p>Ten thousand miles of Silk Road in ruins.</p>
+              <p>The west wind rises with a rustling sound,</p>
+              <p>The ancient path lies in endless cold.</p>
+              <p>Dead trees stand suddenly erect,</p>
+              <p>Relics gradually break apart.</p>
+              <p>Why should the Qiang flute lament?</p>
+              <p>The northern sands have always been vast.</p>
+              <p>Gold thread and Red Cliff tears,</p>
+              <p>Jade hairpins and cold white bones.</p>
+              <p>As stars shift and time passes,</p>
+              <p>Who is left to hear the sands sigh?</p>
+            </div>
+            <div class="translation-note">— By modern poet Xu Shenzhi, 20th century</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scroll2" class="scroll-container">
+        <button class="scroll-close">&times;</button>
+        <div class="scroll-content">
+          <h3 class="scroll-title">梁书·张骞传（节选）</h3>
+          <div class="scroll-text">
+            <p>汉武帝元狩中，遣张骞出使西域。历尽艰辛，终至大宛、康居、大夏，归而过楼兰。楼兰小国也，据交通之枢，扼丝绸之路咽喉。</p>
+            <p>其地沙漠环绕，绿洲点点，有孔雀河流经，水草丰美。楼兰人事汉，岁奉绢帛，时通贡赂。</p>
+            <p>及至汉昭帝始元六年，楼兰王拒使者，又数为匈奴耳目，侵掠汉使。傅介子请带罪图功，刺杀楼兰王，立其弟尉屠耆为王，更名鄯善。</p>
+            <p>自是以后，楼兰远离匈奴，与汉和好，丝路通畅，商旅不绝。</p>
+          </div>
+          <div class="scroll-note">注：本文节选自历史文献《梁书》，记载了汉代张骞出使西域时经过楼兰的历史</div>
+          <div class="scroll-note en-only">Note: This excerpt from "Book of Liang" records Zhang Qian's journey through
+            Loulan during the Han Dynasty</div>
+
+          <!-- 英文翻译 -->
+          <div class="english-translation">
+            <h4>Book of Liang: Biography of Zhang Qian (Excerpt, English Translation)</h4>
+            <div class="translation-text">
+              <p>During Emperor Wu of Han's Yuanshou period, Zhang Qian was sent as an envoy to the Western Regions.
+                After enduring numerous hardships, he finally reached Dayuan (Ferghana), Kangju (Sogdiana), and Daxia
+                (Bactria), and passed through Loulan on his return journey. Loulan was a small kingdom, situated at a
+                transportation hub and controlling a strategic point on the Silk Road.</p>
+              <p>The area was surrounded by desert, dotted with oases, with the Peacock River flowing through it,
+                providing abundant water and grass. The people of Loulan served the Han, annually offering silk fabrics
+                and occasionally sending tribute.</p>
+              <p>By the sixth year of Emperor Zhao of Han's Shiyuan period, the King of Loulan refused to receive Han
+                envoys and repeatedly acted as eyes and ears for the Xiongnu, plundering Han messengers. Fu Jiezi
+                requested permission to risk punishment to achieve merit, assassinated the King of Loulan, and installed
+                the king's younger brother Weituqi as the new ruler, renaming the kingdom Shanshan.</p>
+              <p>From then on, Loulan distanced itself from the Xiongnu, maintained good relations with Han, and the
+                Silk Road remained unobstructed with unceasing merchant travel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scroll3" class="scroll-container">
+        <button class="scroll-close">&times;</button>
+        <div class="scroll-content">
+          <h3 class="scroll-title">屈原·楚辞 楼兰意象</h3>
+          <div class="scroll-text">
+            <p>《楚辞》中虽未直接提及楼兰，但其所描绘的远方异域与神秘西域之景，与楼兰形象颇为神似。后世文人多有借鉴，将楼兰意象融入诗作：</p>
+            <p>"远望西极兮，楼兰何在？大漠孤烟兮，黄沙茫茫。"</p>
+            <p>"飘渺神女兮，居彼高山。楼兰遗韵兮，风吹尘寰。"</p>
+            <p>"思天地之悠悠兮，叹楼兰之已灭。千载往事如梦幻兮，唯残垣独立风沙间。"</p>
+            <p>这些作品借鉴了《楚辞》的表现手法和意境，创造性地将楼兰这一历史文化符号融入其中，形成了独特的"楼兰文学意象"，成为后世文学创作的重要素材。</p>
+          </div>
+          <div class="scroll-note">注：这些作品融合了楚辞风格与楼兰历史，是后世创作而非屈原原作</div>
+          <div class="scroll-note en-only">Note: These works in Chu Ci style combine elements of Loulan history, written
+            by later poets rather than by Qu Yuan</div>
+
+          <!-- 英文翻译 -->
+          <div class="english-translation">
+            <h4>Qu Yuan's Chu Ci: Loulan Imagery (English Translation)</h4>
+            <div class="translation-text">
+              <p>Although Loulan is not directly mentioned in "Chu Ci," the distant exotic lands and mysterious western
+                regions it describes bear a strong resemblance to the image of Loulan. Later literati often drew
+                inspiration from this, incorporating Loulan imagery into their poetry:</p>
+              <p>"Gazing far to the western limit, where lies Loulan? Lonely smoke rises in the vast desert, endless
+                yellow sand spreads out."</p>
+              <p>"The ethereal goddess dwells on that high mountain. The lingering charm of Loulan, as wind blows
+                through the dusty world."</p>
+              <p>"Contemplating the vastness of heaven and earth, lamenting the fall of Loulan. A thousand years of
+                history like a dream, only ruins stand alone amidst wind and sand."</p>
+              <p>These works borrowed the expressive techniques and artistic conception of "Chu Ci," creatively
+                integrating Loulan as a historical and cultural symbol, forming a unique "Loulan literary imagery" that
+                became important material for later literary creations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scroll4" class="scroll-container">
+        <button class="scroll-close">&times;</button>
+        <div class="scroll-content">
+          <h3 class="scroll-title">西域考古记（节选）</h3>
+          <div class="scroll-text">
+            <p>1900年3月，我终于踏上了寻找楼兰古城的旅程。沿着干涸的塔里木河向东，穿过无尽的沙丘，在罗布泊西北侧，我们发现了这座被历史尘埃掩埋的古城。</p>
+            <p>城址坐落在一片低矮的土丘上，四周全是风蚀严重的夯土墙，高处尚存五六米。城中建筑已荡然无存，唯有断壁残垣，诉说着昔日繁华。</p>
+            <p>最为惊人的发现是城北的一座佛塔遗址，以及附近出土的大量文书。这些文书使用汉文、粟特文、佉卢文等多种文字，内容涉及行政管理、宗教活动和日常生活，为我们了解丝绸之路上这座重要城市提供了珍贵资料。</p>
+            <p>最为引人注目的莫过于城东出土的干尸。这些干尸保存完好，服饰、发式清晰可辨，显示出明显的西域特征，而非纯粹的汉人风貌，见证了丝路上多元文化的交融。</p>
+          </div>
+          <div class="scroll-author">— 斯文·赫定（瑞典探险家）</div>
+          <div class="scroll-note">注：本文节选自斯文·赫定的考古日记，记录了他发现楼兰古城的经历</div>
+          <div class="scroll-note en-only">Note: This is an excerpt from Sven Hedin's archaeological diary documenting
+            his discovery of the ancient city of Loulan</div>
+
+          <!-- 英文翻译 -->
+          <div class="english-translation">
+            <h4>Archaeological Records of the Western Regions (Excerpt, English Translation)</h4>
+            <div class="translation-text">
+              <p>In March 1900, I finally embarked on my journey to find the ancient city of Loulan. Following the
+                dried-up Tarim River eastward, crossing endless sand dunes, we discovered this ancient city buried under
+                the dust of history on the northwestern side of Lop Nor.</p>
+              <p>The city site was situated on a low earthen mound, surrounded by severely wind-eroded rammed earth
+                walls, still standing five to six meters high in places. The buildings within the city have completely
+                vanished, with only broken walls and ruins telling the story of its past prosperity.</p>
+              <p>The most astonishing discovery was a Buddhist stupa site in the northern part of the city, as well as
+                numerous documents unearthed nearby. These documents were written in multiple scripts including Chinese,
+                Sogdian, and Kharosthi, with content covering administrative management, religious activities, and daily
+                life, providing valuable information for understanding this important city on the Silk Road.</p>
+              <p>Most notable were the mummies unearthed in the eastern part of the city. These well-preserved mummies,
+                with clearly distinguishable clothing and hairstyles, displayed obvious Western Region characteristics
+                rather than purely Han Chinese features, bearing witness to the multicultural integration along the Silk
+                Road.</p>
+            </div>
+            <div class="translation-note">— Sven Hedin (Swedish explorer)</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scroll5" class="scroll-container">
+        <button class="scroll-close">&times;</button>
+        <div class="scroll-content">
+          <h3 class="scroll-title">沙中死城</h3>
+          <div class="scroll-text">
+            <p>你在哪里，楼兰？</p>
+            <p>我踏遍黄沙千万里，</p>
+            <p>只为寻你一瞥。</p>
+            <p>风蚀的城墙，</p>
+            <p>残破的瓦砾，</p>
+            <p>述说着你的辉煌与凋落。</p>
+            <p>是什么带走了你的生机？</p>
+            <p>是无情的战火，</p>
+            <p>还是变幻的自然？</p>
+            <p>罗布泊的湖水已经干涸，</p>
+            <p>孔雀河的流水不再欢歌。</p>
+            <p>丝路驼铃远去，</p>
+            <p>只留下你，</p>
+            <p>在黄沙中沉睡。</p>
+            <p>沉睡中的楼兰啊，</p>
+            <p>你的梦里可有昔日的繁华？</p>
+            <p>可有丝路商旅的喧嚣？</p>
+            <p>可有汉使匈奴的争锋？</p>
+            <p>历史的风沙掩埋了你的痕迹，</p>
+            <p>却掩不住你在人们心中的传奇。</p>
+          </div>
+          <div class="scroll-author">— 余秋雨</div>
+          <div class="scroll-note en-only">Note: A modern poem titled "Dead City in the Sand" by Yu Qiuyu, reflecting on
+            the lost city of Loulan</div>
+
+          <!-- 英文翻译 -->
+          <div class="english-translation">
+            <h4>Dead City in the Sand (English Translation)</h4>
+            <div class="translation-text">
+              <p>Where are you, Loulan?</p>
+              <p>I have traversed countless miles of yellow sand,</p>
+              <p>Just for a glimpse of you.</p>
+              <p>Wind-eroded city walls,</p>
+              <p>Broken tiles and rubble,</p>
+              <p>Tell of your glory and decline.</p>
+              <p>What took away your vitality?</p>
+              <p>Was it the merciless flames of war,</p>
+              <p>Or the changing face of nature?</p>
+              <p>The waters of Lop Nor have dried up,</p>
+              <p>The Peacock River no longer sings with joy.</p>
+              <p>The camel bells of the Silk Road have gone distant,</p>
+              <p>Leaving only you,</p>
+              <p>Sleeping in the yellow sand.</p>
+              <p>Oh, sleeping Loulan,</p>
+              <p>Do your dreams contain the prosperity of days past?</p>
+              <p>The hustle and bustle of Silk Road merchants?</p>
+              <p>The contention between Han envoys and Xiongnu?</p>
+              <p>The winds and sands of history have buried your traces,</p>
+              <p>But cannot conceal your legend in people's hearts.</p>
+            </div>
+            <div class="translation-note">— By Yu Qiuyu</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="image-navigation">
+    <div class="nav-item" data-page="page_bian">
+      <img src="../public/font/边.png" alt="边" class="nav-img">
+      <span class="nav-title">Location</span>
+    </div>
+    <div class="nav-item" data-page="page_sha">
+      <img src="../public/font/沙.png" alt="沙" class="nav-img">
+      <span class="nav-title">Desert</span>
+    </div>
+    <div class="nav-item" data-page="page_chi">
+      <img src="../public/font/池.png" alt="池" class="nav-img">
+      <span class="nav-title">City</span>
+    </div>
+    <div class="nav-item" data-page="page_shu">
+      <img src="../public/font/书.png" alt="书" class="nav-img">
+      <span class="nav-title">Literature</span>
+    </div>
+    <div class="nav-item" data-page="page_ji">
+      <img src="../public/font/记.png" alt="记" class="nav-img">
+      <span class="nav-title">Antiques</span>
+    </div>
+    <!-- <div class="nav-item" data-page="page_wei">
+      <img src="../public/font/为.png" alt="为" class="nav-img">
+      <span class="nav-title">Being</span>
+    </div> -->
+  </nav>
+
+  <div class="copyright">
+    Copyright © 2025 Designed by Yilei Xiao.
+  </div>
+
+  <audio id="pageAudio" loop>
+    <source src="../public/audio/music_LouLanGuDao.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="../src/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 文字动画序列
+      function startTextAnimations() {
+        // 获取当前语言
+        const currentLang = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'zh-CN';
+        const text1 = currentLang === 'en' ? document.getElementById('introTextEn1') : document.getElementById('introText1');
+        const text2 = currentLang === 'en' ? document.getElementById('introTextEn2') : document.getElementById('introText2');
+        const mainContent = document.getElementById('mainContent');
+
+        // 淡入第一段文字 - 放慢速度
+        setTimeout(() => {
+          text1.style.opacity = 1;
+
+          // 延长显示时间
+          setTimeout(() => {
+            // 延长淡出时间
+            text1.style.transition = "opacity 3s ease-in-out";
+            text1.style.opacity = 0;
+
+            // 第一段淡出后，淡入第二段文字
+            setTimeout(() => {
+              text2.style.transition = "opacity 3s ease-in-out";
+              text2.style.opacity = 1;
+
+              // 延长显示时间
+              setTimeout(() => {
+                // 延长淡出时间
+                text2.style.opacity = 0;
+
+                // 所有文字淡出后，显示主内容
+                setTimeout(() => {
+                  mainContent.style.transition = "opacity 3s ease";
+                  mainContent.style.opacity = 1;
+                }, 2000);
+              }, 5000);
+            }, 2000);
+          }, 5000);
+        }, 2000);
+      }
+
+      // 启动文字动画
+      startTextAnimations();
+
+      // 切换语言时更新动画
+      const langBtns = document.querySelectorAll('.lang-btn');
+      langBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          // 等待main.js中的语言切换完成
+          setTimeout(startTextAnimations, 100);
+        });
+      });
+
+      // Click the literature item to display the scroll
+      const literatureItems = document.querySelectorAll('.literature-item');
+      const scrollContainers = document.querySelectorAll('.scroll-container');
+      const scrollCloseButtons = document.querySelectorAll('.scroll-close');
+
+      // Open the scroll effect sound
+      function playScrollOpenSound() {
+        const scrollSound = new Audio('../public/audio/scroll_open.mp3');
+        scrollSound.volume = 0.4;
+        scrollSound.play().catch(e => console.log('Audio play failed:', e));
+      }
+
+      // Close all scrolls
+      function closeAllScrolls() {
+        scrollContainers.forEach(container => {
+          container.classList.remove('open');
+        });
+      }
+
+      // Click the literature name to open the scroll
+      literatureItems.forEach(item => {
+        item.addEventListener('click', function () {
+          const scrollId = this.getAttribute('data-scroll');
+          const scrollContainer = document.getElementById(scrollId);
+
+          // Close all scrolls first
+          closeAllScrolls();
+
+          // Open the current selected scroll
+          if (scrollContainer) {
+            playScrollOpenSound();
+            scrollContainer.classList.add('open');
+          }
+        });
+      });
+
+      // Close the scroll button
+      scrollCloseButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const container = this.closest('.scroll-container');
+          container.classList.remove('open');
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
