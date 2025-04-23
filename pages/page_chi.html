@@ -103,7 +103,7 @@
     </div>
   </div>
 
-  <!-- 图片放大弹窗 -->
+  <!-- image zoom modal -->
   <div id="spotModal" class="spot-modal">
     <div class="spot-modal-content">
       <span class="close-modal">&times;</span>
@@ -156,7 +156,7 @@
   <script src="../src/js/main.js"></script>
   <script src="../src/js/city-layout.js"></script>
   <script>
-    // 添加引用链接点击事件
+    // add citation link click event
     document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('.citation').forEach(citation => {
         citation.addEventListener('click', function (e) {
@@ -165,7 +165,7 @@
           const targetElement = document.querySelector(targetId);
 
           if (targetElement) {
-            // 平滑滚动到目标元素
+            // smooth scroll to the target element
             targetElement.scrollIntoView({
               behavior: 'smooth',
               block: 'center'

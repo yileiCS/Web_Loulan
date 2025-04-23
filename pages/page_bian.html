@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
-    /* 参考文献样式 */
+    /* reference citation */
     .citation {
       font-size: 0.7em;
       vertical-align: super;
@@ -50,7 +50,7 @@
       0%,
       50% {
         background-color: rgba(52, 152, 219, 0.2);
-        /* 淡蓝色背景 */
+        /* light blue background */
         box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
       }
 
@@ -124,9 +124,9 @@
             class="citation">7</a>，随后引起了世界各国考古学家的关注。目前，楼兰遗址属于中国重点文物保护单位，继续为研究古代丝绸之路历史和中亚文明提供重要资料<a href="#ref8"
             class="citation">8</a>。</p>
 
-        <!-- 参考文献部分 -->
+        <!-- references section -->
         <div class="references" style="padding-left: 0;">
-          <h3>参考文献</h3>
+          <h3>References</h3>
           <ol style="padding-left: 20px;">
             <li id="ref1">维基百科. <a href="https://en.wikipedia.org/wiki/Loulan_Kingdom" target="_blank">楼兰王国</a>. 2024.
             </li>
@@ -257,13 +257,13 @@
           const targetElement = document.querySelector(targetId);
 
           if (targetElement) {
-            // 平滑滚动到目标元素
+            // smooth scroll to the target element
             targetElement.scrollIntoView({
               behavior: 'smooth',
               block: 'center'
             });
 
-            // 短暂高亮显示引用项
+            // briefly highlight the reference item
             targetElement.classList.add('highlight-reference');
             setTimeout(() => {
               targetElement.classList.remove('highlight-reference');

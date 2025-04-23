@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <!-- 视频背景 -->
+  <!-- video background -->
   <div class="video-background">
     <div class="video-wrapper">
       <video id="literature-video" class="fullscreen-video" autoplay muted loop playsinline>
@@ -21,7 +21,7 @@
     <div class="video-overlay"></div>
   </div>
 
-  <!-- 介绍文字 -->
+  <!-- introduction text -->
   <div class="intro-text zh" id="introText1">那些与楼兰有关的文字，<br><span
       class="highlight">如尘封千年的耳语</span>，<br>穿越时光的长河，触动着我们的心弦。</div>
   <div class="intro-text zh" id="introText2">纸莎草上的墨迹犹存，<br>沙漠深处的故事仍在<span
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <!-- 画卷容器 -->
+      <!-- scroll container -->
       <div id="scroll1" class="scroll-container">
         <button class="scroll-close">&times;</button>
         <div class="scroll-content">
@@ -93,7 +93,7 @@
           <div class="scroll-note">本诗创作于20世纪，意在展现楼兰古国的历史变迁与沧桑</div>
           <div class="scroll-note en-only">Note: Classical Chinese poetry is presented in its original form</div>
 
-          <!-- 英文翻译 -->
+          <!-- english translation -->
           <div class="english-translation">
             <h4>Loulan (English Translation)</h4>
             <div class="translation-text">
@@ -133,7 +133,7 @@
           <div class="scroll-note en-only">Note: This excerpt from "Book of Liang" records Zhang Qian's journey through
             Loulan during the Han Dynasty</div>
 
-          <!-- 英文翻译 -->
+          <!-- english translation -->
           <div class="english-translation">
             <h4>Book of Liang: Biography of Zhang Qian (Excerpt, English Translation)</h4>
             <div class="translation-text">
@@ -170,7 +170,7 @@
           <div class="scroll-note en-only">Note: These works in Chu Ci style combine elements of Loulan history, written
             by later poets rather than by Qu Yuan</div>
 
-          <!-- 英文翻译 -->
+          <!-- english translation -->
           <div class="english-translation">
             <h4>Qu Yuan's Chu Ci: Loulan Imagery (English Translation)</h4>
             <div class="translation-text">
@@ -206,7 +206,7 @@
           <div class="scroll-note en-only">Note: This is an excerpt from Sven Hedin's archaeological diary documenting
             his discovery of the ancient city of Loulan</div>
 
-          <!-- 英文翻译 -->
+          <!-- english translation -->
           <div class="english-translation">
             <h4>Archaeological Records of the Western Regions (Excerpt, English Translation)</h4>
             <div class="translation-text">
@@ -260,7 +260,7 @@
           <div class="scroll-note en-only">Note: A modern poem titled "Dead City in the Sand" by Yu Qiuyu, reflecting on
             the lost city of Loulan</div>
 
-          <!-- 英文翻译 -->
+          <!-- english translation -->
           <div class="english-translation">
             <h4>Dead City in the Sand (English Translation)</h4>
             <div class="translation-text">
@@ -332,35 +332,35 @@
   <script src="../src/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // 文字动画序列
+      // text animation sequence
       function startTextAnimations() {
-        // 获取当前语言
+        // get the current language
         const currentLang = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'zh-CN';
         const text1 = currentLang === 'en' ? document.getElementById('introTextEn1') : document.getElementById('introText1');
         const text2 = currentLang === 'en' ? document.getElementById('introTextEn2') : document.getElementById('introText2');
         const mainContent = document.getElementById('mainContent');
 
-        // 淡入第一段文字 - 放慢速度
+        // fade in the first paragraph - slow down the speed
         setTimeout(() => {
           text1.style.opacity = 1;
 
-          // 延长显示时间
+          // extend the display time
           setTimeout(() => {
-            // 延长淡出时间
+            // extend the fade out time
             text1.style.transition = "opacity 3s ease-in-out";
             text1.style.opacity = 0;
 
-            // 第一段淡出后，淡入第二段文字
+            // after the first paragraph fades out, fade in the second paragraph
             setTimeout(() => {
               text2.style.transition = "opacity 3s ease-in-out";
               text2.style.opacity = 1;
 
-              // 延长显示时间
+              // extend the display time
               setTimeout(() => {
-                // 延长淡出时间
+                // extend the fade out time
                 text2.style.opacity = 0;
 
-                // 所有文字淡出后，显示主内容
+                // after all text fades out, display the main content
                 setTimeout(() => {
                   mainContent.style.transition = "opacity 3s ease";
                   mainContent.style.opacity = 1;
@@ -371,14 +371,14 @@
         }, 2000);
       }
 
-      // 启动文字动画
+      // start the text animation
       startTextAnimations();
 
-      // 切换语言时更新动画
+      // update the animation when the language changes
       const langBtns = document.querySelectorAll('.lang-btn');
       langBtns.forEach(btn => {
         btn.addEventListener('click', function () {
-          // 等待main.js中的语言切换完成
+          // wait for the language switch in main.js to complete
           setTimeout(startTextAnimations, 100);
         });
       });

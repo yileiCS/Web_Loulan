@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // 初始化变量
+  // initialize variables
   const globeBtn = document.getElementById('globe-btn');
   const mapContainer = document.getElementById('map-container');
   const placeInfo = document.getElementById('place-info');
@@ -7,24 +7,23 @@ document.addEventListener('DOMContentLoaded', function () {
   const modeBtns = document.querySelectorAll('.map-mode-btn');
   const routeBtns = document.querySelectorAll('.map-route-btn');
 
-  // ArcGIS数据源URL
+  // ArcGIS data source URL
   const arcgisRouteUrl = "https://services.arcgis.com/ue9rwulIoeLEI9bj/arcgis/rest/services/SilkRoad_KidsFair2015/FeatureServer/1/query?where=1%3D1&outFields=*&outSR=4326&f=json";
   const arcgisStopsUrl = "https://services.arcgis.com/ue9rwulIoeLEI9bj/arcgis/rest/services/SilkRoad_KidsFair2015/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json";
 
-  // 全局变量，用于存储ArcGIS数据
+  // global variables, for storing ArcGIS data
   let arcgisRouteData = null;
   let arcgisStopsData = null;
   let arcgisRouteLayer = null;
-  // 添加一个变量跟踪路线显示状态
+  // add a variable to track the route display status
   let silkRoadVisible = false;
 
-  // 音频控制
+  // audio control
   const pageAudio = document.getElementById('pageAudio');
-  if (pageAudio) {
-    pageAudio.volume = 0.9;
-  }
+  const homeAudio = document.getElementById('homeAudio');
+  const currentAudio = pageAudio || homeAudio;
 
-  // 丝绸之路重要城市数据
+  // silk road important cities data
   const silkRoadCities = [
     {
       name: "楼兰古城",
@@ -201,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   ];
 
-  // 丝绸之路路线数据 (简化的GeoJSON格式)
+  // data of silk road routes (simplified GeoJSON format)
   const silkRoadRoutes = {
     northern: [
       [34.3416, 108.9398], // 长安(西安)
@@ -231,52 +230,52 @@ document.addEventListener('DOMContentLoaded', function () {
     ]
   };
 
-  // 地图实例
+  // map instance
   let map;
   let currentRouteLayer;
   let markersLayer;
 
-  // 控制地图显示
+  // control the map display
   if (globeBtn && mapContainer) {
-    // 将点击事件应用到整个容器上
+    // apply the click event to the whole container
     const buttonContainer = document.querySelector('.silk-road-button-container');
     if (buttonContainer) {
       buttonContainer.addEventListener('click', function () {
         toggleMap();
       });
     } else {
-      // 如果找不到新容器，保留旧的点击事件（向后兼容）
+      // if the new container is not found, keep the old click event (backward compatibility)
       globeBtn.addEventListener('click', function () {
         toggleMap();
       });
     }
 
-    // 地图切换功能
+    // map switching function
     function toggleMap() {
       mapContainer.classList.toggle('hidden');
 
       if (!mapContainer.classList.contains('hidden') && !map) {
         initMap();
       } else if (!mapContainer.classList.contains('hidden') && map) {
-        // 更新语言
+        // update the language
         updateMapLanguage();
       }
     }
   }
 
-  // 监听语言切换
+  // listen to language switch
   langButtons = document.querySelectorAll('.lang-btn');
   langButtons.forEach(button => {
     button.addEventListener('click', function () {
-      // 如果地图已初始化，则更新地图语言
+      // if the map is initialized, update the map language
       if (map) {
-        // 延迟一点执行，确保HTML的lang属性已更新
+        // delay a little to ensure the HTML lang attribute is updated
         setTimeout(updateMapLanguage, 100);
       }
     });
   });
 
-  // 获取当前语言的文本
+  // get the text of the current language
   function getLocalizedText(textObj) {
     const isEnglish = document.documentElement.getAttribute('lang') === 'en';
     if (typeof textObj === 'object') {
@@ -285,49 +284,49 @@ document.addEventListener('DOMContentLoaded', function () {
     return textObj;
   }
 
-  // 播放音频（如果存在）
+  // play the audio (if exists)
   function playAudio(audioFile) {
-    // 这里可以添加音频播放逻辑，但由于未提供城市音频文件，暂时不实现
-    console.log('播放音频文件:', audioFile);
+    // here can add the audio playback logic, but since the city audio files are not provided, it is not implemented temporarily
+    console.log('play the audio file:', audioFile);
   }
 
-  // 初始化地图
+  // initialize the map
   function initMap() {
-    // 创建地图实例，居中显示楼兰位置
+    // create the map instance, center on the location of Loulan
     map = L.map('silk-road-map').setView([40.517, 89.833], 5);
 
-    // 添加卫星底图作为默认图层
+    // add the satellite base map as the default layer
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
       maxZoom: 17,
-      className: 'map-tiles-desaturated' // 添加降低饱和度的类
+      className: 'map-tiles-desaturated' // add the class of desaturated
     }).addTo(map);
 
-    // 初始化标记图层
+    // initialize the markers layer
     markersLayer = L.layerGroup().addTo(map);
 
-    // 设置相应按钮为活跃状态
+    // set the corresponding buttons to active state
     document.querySelector('.map-mode-btn[data-mode="satellite"]').classList.add('active');
     document.querySelector('.map-mode-btn[data-mode="terrain"]').classList.remove('active');
-    // 确保路线按钮初始时不是活跃状态
+    // ensure the route button is not active initially
     document.querySelector('.map-route-btn[data-route="arcgis"]').classList.remove('active');
 
-    // 更新按钮文本为当前语言
+    // update the button text to the current language
     updateMapLanguage();
 
-    // 禁用缩放按钮文本选择
+    // disable the text selection of the zoom button
     map.getContainer().style.outline = 'none';
   }
 
-  // 获取ArcGIS丝绸之路数据
+  // get the ArcGIS silk road data
   function fetchArcGISData() {
-    // 添加加载指示器
+    // add the loading indicator
     const loadingIndicator = document.createElement('div');
     loadingIndicator.className = 'loading-indicator';
     loadingIndicator.innerHTML = '<div class="spinner"></div><p>加载丝绸之路数据...</p>';
     document.getElementById('map-container').appendChild(loadingIndicator);
 
-    // 确保路线按钮显示为活跃状态
+    // ensure the route button is displayed as active
     const arcgisButton = document.querySelector('.map-route-btn[data-route="arcgis"]');
     if (arcgisButton) {
       const allButtons = document.querySelectorAll('.map-route-btn');
@@ -335,14 +334,14 @@ document.addEventListener('DOMContentLoaded', function () {
       arcgisButton.classList.add('active');
     }
 
-    // 获取路线数据
+    // get the route data
     fetch(arcgisRouteUrl)
       .then(response => response.json())
       .then(data => {
         arcgisRouteData = data;
         console.log('ArcGIS路线数据加载成功');
 
-        // 同时获取站点数据
+        // get the stops data
         return fetch(arcgisStopsUrl);
       })
       .then(response => response.json())
@@ -350,13 +349,13 @@ document.addEventListener('DOMContentLoaded', function () {
         arcgisStopsData = data;
         console.log('ArcGIS站点数据加载成功');
 
-        // 先显示路线
+        // show the routes first
         showArcGISRoutes();
 
-        // 移除加载指示器
+        // remove the loading indicator
         document.getElementById('map-container').removeChild(loadingIndicator);
 
-        // 稍后显示标记点，创建动画效果
+        // show the markers later, create the animation effect
         setTimeout(function () {
           addCityMarkers();
           showArcGISStops();
@@ -365,17 +364,17 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(error => {
         console.error('加载ArcGIS数据时出错:', error);
 
-        // 移除加载指示器，显示错误信息
+        // remove the loading indicator, show the error information
         loadingIndicator.innerHTML = '<p>加载丝绸之路数据失败，使用内置数据</p>';
         setTimeout(() => {
           document.getElementById('map-container').removeChild(loadingIndicator);
-          // 使用内置路线
+          // use the built-in routes
           showRoute('all');
         }, 2000);
       });
   }
 
-  // 显示ArcGIS路线数据
+  // show the ArcGIS routes data
   function showArcGISRoutes() {
     if (!arcgisRouteData || !arcgisRouteData.features || arcgisRouteData.features.length === 0) {
       console.error('没有有效的ArcGIS路线数据');
@@ -383,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     try {
-      // 清除现有路线
+      // clear the existing routes
       if (currentRouteLayer) {
         map.removeLayer(currentRouteLayer);
       }
@@ -391,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function () {
         map.removeLayer(arcgisRouteLayer);
       }
 
-      // 转换ArcGIS路线数据为GeoJSON格式
+      // convert the ArcGIS routes data to GeoJSON format
       const routeCoordinates = [];
       arcgisRouteData.features.forEach(feature => {
         if (feature.geometry && feature.geometry.paths) {
@@ -402,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
 
-      // 创建路线图层
+      // create the route layer
       const routeLayers = [];
 
       routeCoordinates.forEach(path => {
@@ -416,10 +415,10 @@ document.addEventListener('DOMContentLoaded', function () {
         routeLayers.push(line);
       });
 
-      // 添加到地图
+      // add to the map
       arcgisRouteLayer = L.layerGroup(routeLayers).addTo(map);
 
-      // 调整地图视图以显示所有路线
+      // adjust the map view to show all routes
       const bounds = L.latLngBounds();
       routeCoordinates.forEach(path => {
         path.forEach(point => {
@@ -434,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 显示ArcGIS站点数据
+  // show the ArcGIS stops data
   function showArcGISStops() {
     if (!arcgisStopsData || !arcgisStopsData.features || arcgisStopsData.features.length === 0) {
       console.error('没有有效的ArcGIS站点数据');
@@ -442,41 +441,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     try {
-      // 重要城市坐标，这些点会有呼吸效果
+      // important city coordinates, these points will have a breathing effect
       const importantCityCoords = silkRoadCities.map(city =>
         [city.coords[0].toFixed(3), city.coords[1].toFixed(3)]
       );
 
-      // 添加ArcGIS站点
+      // add the ArcGIS stops
       arcgisStopsData.features.forEach(feature => {
         if (feature.geometry && feature.geometry.y && feature.geometry.x) {
           const lat = feature.geometry.y;
           const lng = feature.geometry.x;
           const name = feature.attributes.NAME || 'Unknown Stop';
 
-          // 检查是否为重要城市坐标（有详细信息的点）
+          // check if it is the important city coordinates (points with detailed information)
           const isImportantCity = importantCityCoords.some(coords =>
             Math.abs(lat - parseFloat(coords[0])) < 0.1 &&
             Math.abs(lng - parseFloat(coords[1])) < 0.1
           );
 
           if (isImportantCity) {
-            // 跳过这个点，因为它已经由addCityMarkers函数添加
+            // skip this point, because it has been added by the addCityMarkers function
             return;
           }
 
-          // 创建站点标记 - 小的静态白点
+          // create the stop marker - a small static white point
           const stopMarker = L.circleMarker([lat, lng], {
-            radius: 3,  // 更小的圆点
-            fillColor: '#ffffff',  // 白色
+            radius: 3,  // a smaller circle point
+            fillColor: '#ffffff',  // white
             color: '#ffffff',
             weight: 1,
             opacity: 0.8,
             fillOpacity: 0.6,
-            zIndex: 900 // 确保高于路线层但低于主要城市点
+            zIndex: 900 // ensure it is above the route layer but below the important city points
           }).addTo(markersLayer);
 
-          // 添加悬停提示
+          // add the hover tooltip
           if (name && name !== 'Unknown Stop') {
             stopMarker.bindTooltip(name, {
               permanent: false,
@@ -487,7 +486,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
 
-      // 确保标记层在路线上方
+      // ensure the markers layer is above the routes
       if (markersLayer) {
         markersLayer.bringToFront();
       }
@@ -497,25 +496,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 处理ArcGIS数据并显示在地图上
+  // process the ArcGIS data and display it on the map
   function processArcGISData() {
-    // 清除旧的标记点
+    // clear the old markers
     markersLayer.clearLayers();
 
-    // 先显示路线
+    // show the routes first
     showArcGISRoutes();
 
-    // 然后显示标记点
+    // then show the markers
     setTimeout(function () {
       addCityMarkers();
       showArcGISStops();
     }, 500);
   }
 
-  // 添加城市标记 - 这些是带有详细信息的重要点位
+  // add the city markers - these are the important points with detailed information
   function addCityMarkers() {
     silkRoadCities.forEach(city => {
-      // 根据城市类型设置标记样式
+      // set the marker style based on the city type
       let markerOptions = {
         radius: 8,
         fillColor: '#ffae42',
@@ -524,10 +523,10 @@ document.addEventListener('DOMContentLoaded', function () {
         opacity: 1,
         fillOpacity: 0.8,
         className: 'breathing-marker',
-        zIndex: 1000 // 确保高于路线层
+        zIndex: 1000 // ensure it is above the route layer
       };
 
-      // 楼兰为特殊颜色和大小
+      // Loulan is a special color and size
       if (city.type === 'loulan') {
         markerOptions.radius = 10;
         markerOptions.fillColor = '#d9534f';
@@ -548,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 更新标记提示
+  // update the marker tooltip
   function updateMarkerTooltip(marker, city) {
     const isEnglish = document.documentElement.getAttribute('lang') === 'en';
     marker.unbindTooltip();
@@ -559,13 +558,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 显示地点信息
+  // show the place info
   function showPlaceInfo(place) {
     const placeName = document.getElementById('place-name');
     const placeImage = document.getElementById('place-image');
     const placeDescription = document.getElementById('place-description');
 
-    // 根据当前语言设置内容
+    // set the content based on the current language
     const isEnglish = document.documentElement.getAttribute('lang') === 'en';
 
     placeName.textContent = isEnglish ? place.nameEn : place.name;
@@ -573,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function () {
     placeImage.alt = isEnglish ? place.nameEn : place.name;
     placeDescription.innerHTML = isEnglish ? place.description.en : place.description.zh;
 
-    // 添加参考文献部分
+    // add the references section
     if (place.references && place.references.length > 0) {
       let referencesHtml = `
         <div class="place-references">
@@ -588,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function () {
       referencesHtml += `</ol></div>`;
       placeDescription.innerHTML += referencesHtml;
 
-      // 添加引用点击事件
+      // add the reference click event
       setTimeout(() => {
         const citations = document.querySelectorAll('.city-citation');
         citations.forEach(citation => {
@@ -607,37 +606,37 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 100);
     }
 
-    // 显示信息面板
+    // show the info panel
     placeInfo.classList.remove('hidden');
   }
 
-  // 关闭地点信息
+  // close the place info
   if (closeInfoBtn) {
     closeInfoBtn.addEventListener('click', function () {
       placeInfo.classList.add('hidden');
     });
   }
 
-  // 地图样式切换
+  // map style switch
   modeBtns.forEach(btn => {
     btn.addEventListener('click', function () {
-      // 移除所有按钮的活跃状态
+      // remove the active state of all buttons
       modeBtns.forEach(b => b.classList.remove('active'));
 
-      // 设置当前按钮为活跃状态
+      // set the current button to active state
       this.classList.add('active');
 
-      // 获取地图模式
+      // get the map mode
       const mode = this.getAttribute('data-mode');
 
-      // 移除当前底图
+      // remove the current base map
       map.eachLayer(layer => {
         if (layer instanceof L.TileLayer) {
           map.removeLayer(layer);
         }
       });
 
-      // 添加新底图
+      // add the new base map
       if (mode === 'terrain') {
         L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
           attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>',
@@ -654,80 +653,80 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 路线切换
+  // route switch
   routeBtns.forEach(btn => {
     btn.addEventListener('click', function () {
-      // 获取路线类型
+      // get the route type
       const route = this.getAttribute('data-route');
 
       if (route === 'arcgis') {
-        // 切换按钮状态
+        // switch the button status
         if (silkRoadVisible) {
-          // 如果路线当前可见，则隐藏
+          // if the route is currently visible, hide it
           this.classList.remove('active');
 
-          // 清除路线和标记
+          // clear the routes and markers
           if (arcgisRouteLayer && map.hasLayer(arcgisRouteLayer)) {
             map.removeLayer(arcgisRouteLayer);
           }
           markersLayer.clearLayers();
 
-          // 更新状态
+          // update the status
           silkRoadVisible = false;
         } else {
-          // 如果路线当前不可见，则显示
-          // 移除所有按钮的活跃状态
+          // if the route is currently not visible, show it
+          // remove the active state of all buttons
           routeBtns.forEach(b => b.classList.remove('active'));
 
-          // 设置当前按钮为活跃状态
+          // set the current button to active state
           this.classList.add('active');
 
-          // 清除现有的标记点
+          // clear the existing markers
           markersLayer.clearLayers();
 
-          // 如果arcgis数据已加载，显示路线和标记点
+          // if the arcgis data is loaded, show the routes and markers
           if (arcgisRouteData) {
-            // 先显示路线
+            // show the routes first
             showArcGISRoutes();
 
-            // 然后延迟显示标记点
+            // then delay the display of the markers
             setTimeout(function () {
               addCityMarkers();
               showArcGISStops();
             }, 500);
           }
-          // 如果arcgis数据未加载，加载它
+          // if the arcgis data is not loaded, load it
           else {
             fetchArcGISData();
           }
 
-          // 更新状态
+          // update the status
           silkRoadVisible = true;
         }
       } else {
-        // 其他路线处理逻辑保持不变
-        // 移除所有按钮的活跃状态
+        // other route processing logic remains unchanged
+        // remove the active state of all buttons
         routeBtns.forEach(b => b.classList.remove('active'));
 
-        // 设置当前按钮为活跃状态
+        // set the current button to active state
         this.classList.add('active');
 
-        // 显示其他路线
+        // show the other routes
         showRoute(route);
 
-        // 更新状态
+        // update the status
         silkRoadVisible = true;
       }
     });
   });
 
   function showRoute(routeType) {
-    // 清除当前路线
+    // clear the current route
     if (currentRouteLayer) {
       map.removeLayer(currentRouteLayer);
     }
 
-    // 如果ArcGIS路线正在显示，则根据选择决定是否隐藏
+    // if the arcgis route is currently visible, decide whether to hide it based on the selection
     if (arcgisRouteLayer && map.hasLayer(arcgisRouteLayer)) {
       map.removeLayer(arcgisRouteLayer);
     }
@@ -735,19 +734,19 @@ document.addEventListener('DOMContentLoaded', function () {
     if (routeType === 'all') {
 
 
-      // 设置地图视图以显示所有路线
+      // set the map view to show all routes
       const bounds = northLine.getBounds().extend(southLine.getBounds());
       map.fitBounds(bounds, { padding: [50, 50] });
 
     } else if (routeType === 'arcgis') {
-      // 如果选择ArcGIS路线但数据尚未加载，则尝试加载
+      // if the arcgis route is selected but the data is not loaded, try to load it
       if (!arcgisRouteData) {
         fetchArcGISData();
       } else {
         processArcGISData();
       }
     } else {
-      // 显示单条路线
+      // show the single route
       let routeCoords = [];
       routeCoords = silkRoadRoutes[routeType];
 
@@ -755,16 +754,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
       currentRouteLayer = L.polyline(routeCoords, {
         color: color,
-        weight: 3.2, // 减小20%（原来是4）
+        weight: 3.2, // 
         opacity: 0.8,
         dashArray: '5, 10'
       }).addTo(map);
 
-      // 设置地图视图以显示所选路线
+      // set the map view to show the selected route
       map.fitBounds(currentRouteLayer.getBounds(), { padding: [50, 50] });
     }
 
-    // 确保标记层在路线上方
+    // ensure the markers layer is above the routes
     if (markersLayer) {
       markersLayer.bringToFront();
     }
@@ -836,4 +835,26 @@ document.addEventListener('DOMContentLoaded', function () {
       en: "Silk Road Route"
     },
   };
+
+  // intercept clicks
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      const page = item.dataset.page;
+      fetch(`pages/${page}.html`)
+        .then(r => r.text())
+        .then(html => {
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          document.getElementById('app').innerHTML = doc.querySelector('#app').innerHTML;
+          document.title = doc.title;
+          history.pushState({ page }, '', `/${page}.html`);
+          // 重新初始化语言、引用滚动、视频等逻辑
+        });
+    });
+  });
+  // 处理 back/forward
+  window.addEventListener('popstate', e => {
+    const page = e.state?.page || 'index';
+    // 同上 fetch 并填充
+  });
 }); 
