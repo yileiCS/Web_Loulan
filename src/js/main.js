@@ -46,25 +46,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 音乐控制功能
+  // music control functionality
   const musicIcon = document.querySelector('.music-icon');
   const pageAudio = document.getElementById('pageAudio');
   const homeAudio = document.getElementById('homeAudio');
 
-  // 获取当前页面的音频元素
+  // get the audio element of the current page
   const currentAudio = pageAudio || homeAudio;
 
-  // 检查音乐状态并设置
+  // check the music state and set it
   function initMusicState() {
     const musicState = localStorage.getItem('musicState');
 
     if (musicIcon && currentAudio) {
       if (musicState === 'paused') {
-        // 音乐应该是暂停状态
+        // the music should be paused
         currentAudio.pause();
         musicIcon.classList.add('paused');
       } else {
-        // 尝试播放音乐
+        // try to play the music
         const playPromise = currentAudio.play();
         if (playPromise !== undefined) {
           playPromise.catch(function (error) {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      // 点击音乐图标控制音频播放/暂停
+      // click the music icon to control the audio playback/pause
       musicIcon.addEventListener('click', function () {
         if (currentAudio.paused) {
           currentAudio.play();
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 页面加载时初始化音乐状态
+  // initialize the music state when the page loads
   initMusicState();
 
   document.addEventListener('click', function enableAudio() {
@@ -107,11 +107,11 @@ document.addEventListener('DOMContentLoaded', function () {
     navItems.forEach(item => {
       item.addEventListener('click', function () {
         const page = this.getAttribute('data-page');
-        // 获取当前页面名称
+        // get the current page name
         const currentPath = window.location.pathname;
         const currentPage = currentPath.split('/').pop().split('.')[0];
 
-        // 如果点击的是当前页面，不进行跳转
+        // if the clicked item is the current page, do not navigate
         if (page === currentPage) {
           return;
         }
@@ -128,11 +128,11 @@ document.addEventListener('DOMContentLoaded', function () {
       localStorage.setItem('musicState', 'paused');
     }
 
-    // 判断当前是否在index.html
+    // check if the current page is index.html
     const isIndex = window.location.pathname.endsWith('index.html')
       || window.location.pathname.endsWith('/');
 
-    // 根据当前页面构建正确的URL
+    // build the correct URL based on the current page
     const prefix = isIndex ? 'pages/' : '';
     window.location.href = `${prefix}${page}.html`;
   }
@@ -150,14 +150,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 500);
   }
 
-  // 入口点动画和交互
+  // entrance point animation and interaction
   const entrancePoint = document.querySelector('.entrance-point');
   const imageNavigation = document.querySelector('.image-navigation');
   const calligraphyContainer = document.querySelector('.calligraphy-container');
 
   if (entrancePoint && imageNavigation && calligraphyContainer) {
     entrancePoint.addEventListener('click', function () {
-      // 隐藏入口点
+      // hide the entrance point
       entrancePoint.style.opacity = '0';
 
       calligraphyContainer.querySelectorAll('.calligraphy-character').forEach(char => {
